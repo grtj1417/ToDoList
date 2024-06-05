@@ -1,12 +1,50 @@
 import { Project, Task, TaskPriority } from "./drawerObject.js";
 
+var svgData = [{
+    type: 'svg',
+    data: {
+      viewBox: "0 0 500 100"
+    }
+  },
+  {
+    type: 'polyline',
+    data: {
+      fill: "none",
+      stroke: "#e9be3d",
+      strokeWidth: "8",
+      points: "00,120 20,60 40,120 60,10 80,80 100,80 120,60 140,100"
+    }
+  },
+];
+function getNode(n, v) {
+    n = document.createElementNS("http://www.w3.org/2000/svg", n);
+    for (var p in v) {
+      n.setAttributeNS(null, p.replace(/[A-Z]/g, function(m, p, o, s) {
+        return "-" + m.toLowerCase();
+      }), v[p]);
+    }
+    return n
+  }
+  
+  function makeSVG(data) {
+    var result;
+    data.forEach(
+      function(elem, index, array) {
+        if (index)
+          result.appendChild(getNode(elem.type, elem.data));
+        else
+          result = getNode(elem.type, elem.data);
+      }
+    );
+    return result;
+  }
 function create_task_html_object(task, index) {
     console.log("有按到");
     const obj = document.createElement("div");
     obj.classList.add("task-li");
     const uniqueId =  index.toString();  // 確保ID唯一
     console.log(uniqueId);
-    obj.setAttribute("id", uniqueId);
+    // obj.setAttribute("id", uniqueId);
 
     const checkContainer = document.createElement("span");
     checkContainer.classList.add("check-container");
@@ -19,14 +57,15 @@ function create_task_html_object(task, index) {
     label.setAttribute("for", uniqueId);  // 使用唯一ID
     label.classList.add("button");
     //勾勾
-    const svg = document.createElement("svg");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.classList.add("checkmark");
 
     const polyline = document.createElement("polyline");
     
     polyline.setAttribute("points", "1,5 6,9 14,1");
-    svg.append(polyline);
-    checkContainer.append(input, label, svg);
+    svg.append(makeSVG(svgData));
+
+    checkContainer.append(input, label, makeSVG(svgData));
 
     const taskName = document.createElement("span");
     taskName.classList.add("task-name");
