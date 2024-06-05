@@ -1,0 +1,99 @@
+.container.sidebar-hidden {
+    grid-template-columns: 0;
+}
+
+.sidebar {
+    height: 100vh;
+    margin-right: 3px;
+    padding: 20px 25px;
+    box-shadow: 1px 1px 4px rgb(155, 155, 155);
+    /* overflow: hidden; */
+    transition: width 0.2s ease-in-out;
+    background-color: white;
+}
+
+.sidebar-content {
+    margin-top: 20px;
+    height: 85%;
+    display: grid;
+    overflow: auto;
+}
+
+.sidebar-open-btn {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: no-repeat center/90% url(../images/burger.svg);
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 99;
+    box-shadow: 1px 1px 2px rgb(115, 115, 115);
+    border-radius: 10%;
+}
+
+.sidebar-close-btn {
+    width: 35px;
+    height: 35px;
+    border: 0;
+    background: no-repeat center/90% url(../images/cross.svg);
+    position: absolute;
+    top: 20px;
+    left: 200px;
+    z-index: 99;
+    display: none;
+}
+
+.sidebar-close-btn:hover {
+    top: 18px;
+}
+
+.container.sidebar-hidden .sidebar-close-btn {
+    display: none;
+}
+
+.container.sidebar-hidden .sidebar-open-btn {
+    display: block;
+}
+
+.add-project {
+    width: min-content;
+    height: min-content;
+    padding: 5px 8px;
+    justify-self: center;
+    align-self: flex-end;
+    cursor: pointer;
+    background-color: #d9e5f8;
+    /* box-shadow: 1px 1px 2px rgb(99, 99, 99); */
+    border-radius: 8px;
+    border: none;
+    white-space: nowrap;
+}
+
+.add-project:hover {
+    position: relative;
+    top: -2px;
+}
+
+#sidebar-project-display > li {
+    margin-bottom: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.add-project {
+    display: flex;
+    margin: 10px 0;
+}
+
+.add-project>span {
+    align-self: center;
+    margin-left: 5px;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+}
