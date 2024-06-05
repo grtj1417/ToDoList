@@ -1,109 +1,5 @@
 import { Project, Task, TaskPriority } from "./drawerObject.js";
-
-var svgData = [{
-    type: 'svg',
-    data: {
-      viewBox: "0 0 500 100"
-    }
-  },
-  {
-    type: 'polyline',
-    data: {
-      fill: "none",
-      stroke: "#e9be3d",
-      strokeWidth: "8",
-      points: "00,120 20,60 40,120 60,10 80,80 100,80 120,60 140,100"
-    }
-  },
-];
-function getNode(n, v) {
-    n = document.createElementNS("http://www.w3.org/2000/svg", n);
-    for (var p in v) {
-      n.setAttributeNS(null, p.replace(/[A-Z]/g, function(m, p, o, s) {
-        return "-" + m.toLowerCase();
-      }), v[p]);
-    }
-    return n
-  }
-  
-  function makeSVG(data) {
-    var result;
-    data.forEach(
-      function(elem, index, array) {
-        if (index)
-          result.appendChild(getNode(elem.type, elem.data));
-        else
-          result = getNode(elem.type, elem.data);
-      }
-    );
-    return result;
-  }
-function create_task_html_object(task, index) {
-    console.log("有按到");
-    const obj = document.createElement("div");
-    obj.classList.add("task-li");
-    const uniqueId =  index.toString();  // 確保ID唯一
-    console.log(uniqueId);
-    // obj.setAttribute("id", uniqueId);
-
-    const checkContainer = document.createElement("span");
-    checkContainer.classList.add("check-container");
-    //圓框
-    const input = document.createElement("input");
-    input.setAttribute("type", "checkbox");
-    input.setAttribute("name", uniqueId);  // 使用唯一ID
-    input.setAttribute("id", uniqueId); 
-    const label = document.createElement("label");
-    label.setAttribute("for", uniqueId);  // 使用唯一ID
-    label.classList.add("button");
-    //勾勾
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.classList.add("checkmark");
-
-    const polyline = document.createElement("polyline");
-    
-    polyline.setAttribute("points", "1,5 6,9 14,1");
-    svg.append(makeSVG(svgData));
-
-    checkContainer.append(input, label, makeSVG(svgData));
-
-    const taskName = document.createElement("span");
-    taskName.classList.add("task-name");
-    taskName.textContent = task.title;
-    const taskDate = document.createElement("span");
-    taskDate.classList.add("task-date");
-    taskDate.textContent = task.date;
-    const taskPrio = document.createElement("span");
-    taskPrio.classList.add("task-prio");
-    const taskPrioImg = document.createElement("img");
-    if (task.taskPriority == 2) {
-        taskPrioImg.src = "./images/high.png";
-    } else if (task.taskPriority == 1) {
-        taskPrioImg.src = "./images/medium.png";
-    } else if (task.taskPriority == 0) {
-        taskPrioImg.src = "./images/low.png";
-    }
-    taskPrio.append(taskPrioImg);
-
-    const editIcon = document.createElement("span");
-    editIcon.classList.add("edit-icon");
-    const editIconImg = document.createElement("img");
-    editIconImg.src = "./images/edit.svg";
-    editIcon.append(editIconImg);
-
-    const delIcon = document.createElement("span");
-    delIcon.classList.add("del-icon");
-    const delIconImg = document.createElement("img");
-    delIconImg.src = "./images/delete.svg";
-    delIcon.append(delIconImg);
-
-    const line = document.createElement("div");
-    line.classList.add("line");
-
-    obj.append(checkContainer, taskName, taskDate, taskPrio, editIcon, delIcon, line)
-    return obj;
-    //return 完 obj 後記得找 "task-ul" append obj
-}
+import { create_task_html_object } from "./utils.js";
 
 class TodoList {
     constructor() {
@@ -372,6 +268,6 @@ console.log(tsk);
 var tskhtmlObj = create_task_html_object(tsk, 11);
 const tskContent = document.querySelector(".task-ul");
 tskContent.append(tskhtmlObj);
-tskhtmlObj = create_task_html_object(tsk, 22);
+// tskhtmlObj = create_task_html_object(tsk, 22);
 
-tskContent.append(tskhtmlObj);
+// tskContent.append(tskhtmlObj);
