@@ -8,11 +8,11 @@
     position: relative;
     top: 3px;
     left: -16px;
-    /* fill: none; */
-    /* stroke: #c1bf55; */
-    /* stroke-width: 2;
+    fill: none;
+    stroke: #c1bf55;
+    stroke-width: 2;
     stroke-dasharray: 38 38;
-    stroke-dashoffset: 38; */
+    stroke-dashoffset: 38;
     transition: all 0.5s ease-out;
     pointer-events: none;
 }

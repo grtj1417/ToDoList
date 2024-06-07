@@ -10,10 +10,12 @@ class Task
         title,          // string
         date,           // YYYY/MM/DD (split)
         taskPriority,        // TaskPriority.HIGH, MEDIUM, LOW 
+        parentProject
     ) {
         this.title = title;
         this.date = date;
         this.taskPriority = taskPriority;
+        this.parentProject = parentProject;
         this.isDone = false;
     };
     toggle_isDone() {

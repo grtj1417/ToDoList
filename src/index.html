@@ -5,286 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
-    <link rel="icon" href="images/todolist.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./css/wave.css">
-    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="icon" href="./images/todolist.svg" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="./css/alert.css">
     <link rel="stylesheet" href="./css/checkbox.css">
     <link rel="stylesheet" href="./css/driopdown.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/wave.css"> -->
     <script type="module" src="./js/index.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            width: 100%;
-            height: 100vh;
-            --primary-color: #C7DCFF;
-            --standard-text-shadow: .08em .08em .1em rgb(49, 49, 49);
-            font-size: 18px;
-            font-family: "PT Serif";
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        ul,
-        li {
-            list-style: none;
-        }
-
-        .container {
-            display: grid;
-            height: 100%;
-            width: 100%;
-            grid-template-columns: 250px 1fr;
-            transition: grid-template-columns 0.3s ease;
-        }
-
-        .main-container {
-            height: 100%;
-            background-color: rgb(234, 234, 234);
-            grid-column: 2 / 3;
-            padding-left: 15px;
-        }
-
-        .title {
-            flex: 1 1 100%;
-            text-align: center;
-            font-size: 32px;
-            font-weight: bold;
-            color: rgb(36, 36, 40);
-            margin: 20px 0 15px;
-        }
-
-        .to-do-list {
-            width: clamp(380px, 45vw + 5rem, 550px);
-            height: 93vh;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .to-do-list:nth-child(n) {
-            color: white;
-        }
-
-        .task-container {
-            width: 90%;
-            height: 90%;
-            padding: 10px 15px;
-            background-color: rgb(94, 94, 94);
-            margin: 0 auto;
-            border-radius: 5px;
-            color: #e5e5e5;
-        }
-
-        .task-title {
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: #e4e4e4;
-            letter-spacing: .08em;
-            margin-top: 10px;
-        }
-
-        /* 新增task按鈕 */
-        .add-task {
-            margin-left: auto;
-            font-size: 1.1rem;
-            margin-right: 10px;
-            margin-top: -10px;
-            cursor: pointer;
-            width: 100px;
-            letter-spacing: normal;
-            text-shadow: var(--standard-text-shadow);
-        }
-
-        .add-task-btn {
-            width: 20px;
-            height: 20px;
-            border: none;
-            background: no-repeat center/100% url(./images/add-white.svg);
-        }
-
-        .add-task>span {
-            white-space: nowrap;
-
-        }
-
-        .add-task:hover {
-            position: relative;
-            top: -2px;
-        }
-
-        /* 分類label */
-        .label-container {
-            position: absolute;
-            z-index: 99;
-            margin-top: 20px;
-            width: min-content;
-        }
-
-        .label-container>* {
-            position: relative;
-            left: -25px;
-            height: min-content;
-            padding: 5px;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 8px;
-            border-radius: 3px;
-            background-color: rgb(126, 126, 126);
-            box-shadow: 1px 1px 3px rgb(33, 33, 33);
-            cursor: pointer;
-        }
-
-        .label-container>*:hover {
-            position: relative;
-            top: -2px;
-        }
-
-        .all-label {
-            padding-left: 3px;
-        }
-
-
-        /* task區域 */
-        .task-content {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: .4fr minmax(47px, 2fr) minmax(38px, 1.8fr) 1fr .4fr .4fr;
-            column-gap: 10px;
-            padding-left: 15px;
-            text-shadow: var(--standard-text-shadow);
-        }
-
-        /* task header */
-        .task-content span:nth-child(-n + 6) {
-            font-size: .9rem;
-            text-shadow: none;
-            color: #bdbdbd;
-            margin-bottom: 10px;
-        }
-
-        .task-ul {
-            grid-column: 1 / 7;
-        }
-
-        .task-li {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: .4fr minmax(47px, 2fr) minmax(38px, 1.8fr) 1fr .4fr .4fr;
-            column-gap: 10px;
-        }
-
-        .task-name {
-            align-self: center;
-        }
-
-        .task-date {
-            font-size: 1rem;
-            align-self: center;
-        }
-
-        .task-prio {
-            width: 23px;
-            height: 23px;
-            align-self: center;
-            justify-self: center;
-        }
-
-        .task-prio>img {
-            width: 23px;
-        }
-
-        .edit-icon {
-            width: 35px;
-            justify-self: center;
-            align-self: center;
-            padding-right: 10px;
-            cursor: pointer;
-        }
-
-        .del-icon {
-            width: 20px;
-            justify-self: center;
-            align-self: center;
-            padding-right: 10px;
-
-            cursor: pointer;
-        }
-
-        .line {
-            grid-column: 1/7;
-            height: .05rem;
-            box-shadow: .06rem .06rem .1rem rgb(40, 40, 40);
-            background-color: rgb(25, 25, 25);
-        }
-
-
-        dialog {
-            width: min-content;
-            height: min-content;
-            margin: auto;
-            padding: 30px 40px;
-            border-radius: 20px;
-            border: 5px solid #173b67;
-        }
-
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        form>label {
-            display: flex;
-            flex: 1 1 100%;
-            flex-wrap: wrap;
-        }
-
-        form>label {
-            margin-bottom: 5px;
-            margin-top: 10px;
-        }
-
-        form:nth-child(5),
-        form:nth-child(7) {
-            display: inline;
-        }
-
-        .create-btn {
-            display: flex;
-            flex: 1 1 100%;
-            margin: 15px auto 0;
-            width: min-content;
-            height: min-content;
-            padding: 8px 15px;
-            font-size: 16px;
-            letter-spacing: 0.08em;
-            white-space: nowrap;
-            border-radius: 5px;
-            border: none;
-            box-shadow: 2px 2px 3px rgb(111, 111, 111);
-            color: white;
-            background-color: #c8c84a;
-            background-color: #4a7ec8;
-        }
-
-        .create-task-btn:hover {
-            position: relative;
-            top: -2px;
-        }
-
-        .create-task-btn:active {
-            background-color: #3d6aa9;
-            position: relative;
-            top: 0px;
-        }
-    </style>
 </head>
 
 <body>
@@ -303,7 +31,6 @@
         </div>
 
         <div class="main-container">
-
             <p class="title">My To Do List</p>
             <div class="to-do-list">
                 <div class="label-container">
@@ -318,49 +45,24 @@
                             <span>add task</span>
                         </div>
                     </div>
-                    <!-- 在這裡用 DOM 添加task -->
 
                     <div class="task-content">
                         <!-- task header -->
-                        <span>Done</span>
-                        <span>Task Name</span>
-                        <span>Due By</span>
-                        <span>Priority</span>
-                        <span>Edit</span>
-                        <span>Delete</span>
-                        <!-- checkbox -->
+                        <p>Done</p>
+                        <p>Task Name</p>
+                        <p>Due By</p>
+                        <p>Priority</p>
+                        <p>Edit</p>
+                        <p>Delete</p>
 
-
-
-                        <div class="task-ul">
-                            <div class="task-li"  id="1">
-                                <span class="check-container">
-                                    <input type="checkbox" name="00" id="00">
-                                    <label for="00" class="button"></label>
-                                    <svg class="checkmark" width="15px" height="15px">
-                                        <polyline points="1,5 6,9 14,1" />
-                                    </svg>
-                                    
-                                </span>
-
-                                <span class="task-name">Default task</span>
-                                <span class="task-date">2024 / 6 / 1</span>
-                                <span class="task-prio"><img src="./images/high.png" alt=""></span>
-                                <span class="edit-icon"><img src="./images/edit.svg" alt="" class="edit-icon"></span>
-                                <span class="del-icon"><img src="./images/delete.svg" alt=""></span>
-                                <div class="line"></div>
-                            </div>
-
-                        </div>
-
-
-
-
-
+                        <!-- task list -->
+                        <div class="task-ul"></div>
                     </div>
                 </div>
             </div>
 
+
+            <!-- add task dialog -->
             <dialog aria-label="new-task-card" class="add-task-dialog" draggable="false">
                 <div>
                     <h3 id="new-task-card">Add task</h3>
@@ -378,6 +80,11 @@
                                 <p>Project1</p>
                                 <p>Project2</p>
                             </div>
+                            <div class="mwt_border">
+                                <span class="required-text required0">請選擇Project</span>
+                                <span class="arrow_l_int"></span>
+                                <span class="arrow_l_out"></span>
+                            </div>
                         </div>
 
                         <label for="priority-input">Priority</label>
@@ -388,6 +95,11 @@
                                 <p>Medium</p>
                                 <p>Low</p>
                             </div>
+                            <div class="mwt_border">
+                                <span class="required-text required1">請選擇Priority</span>
+                                <span class="arrow_l_int"></span>
+                                <span class="arrow_l_out"></span>
+                            </div>
                         </div>
                         <button type="submit" class="create-btn create-task-btn">Create task</button>
                     </form>
@@ -395,7 +107,7 @@
             </dialog>
 
 
-            <!-- 新增project的dialog -->
+            <!-- add project dialog -->
             <dialog aria-label="new-project-card" class="add-project-dialog" draggable="false">
                 <h3>Add project</h3>
                 <label for="project-name">Project name</label>
@@ -403,8 +115,49 @@
                 <button type="submit" class="create-btn create-proj-btn">Create project</button>
             </dialog>
 
-        </div>
 
+            <!-- edit task dialog -->
+            <dialog aria-label="edit-task-card" class="edit-task-dialog" draggable="false">
+                <h3>Edit task</h3>
+                <form method="dialog" action="">
+                    <label for="task-name-input">Task name</label>
+                    <input class="task-name-input-edit" type="text" name="task-name-input" autocomplete="off" required>
+                    <label for="date-input">Due date</label>
+                    <input class="date-input-edit" type="date" name="date-input" autocomplete="off" required>
+
+                    <label for="project-input">Project</label>
+                    <div class="dropdown-edit dropdown">
+                        <button class="dropbtn" id="dropdown-btn-proj-edit" type="button">Select one</button>
+                        <div class="dropdown-content" id="dropdown-content-proj-edit">
+                            <p>Default project</p>
+                            <p>Project1</p>
+                            <p>Project2</p>
+                        </div>
+                        <div class="mwt_border">
+                            <span class="required-text required0">請選擇Project</span>
+                            <span class="arrow_l_int"></span>
+                            <span class="arrow_l_out"></span>
+                        </div>
+                    </div>
+
+                    <label for="priority-input">Priority</label>
+                    <div class="dropdown-edit dropdown">
+                        <button class="dropbtn" id="dropdown-btn-prio-edit" type="button">Select one</button>
+                        <div class="dropdown-content" id="dropdown-content-prio-edit">
+                            <p>High</p>
+                            <p>Medium</p>
+                            <p>Low</p>
+                        </div>
+                        <div class="mwt_border">
+                            <span class="required-text required1">請選擇Priority</span>
+                            <span class="arrow_l_int"></span>
+                            <span class="arrow_l_out"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="create-btn edit-task-btn">Save</button>
+                </form>
+            </dialog>
+        </div>
 
         <div class="wrapper">
             <div class="wave one"></div>
@@ -416,7 +169,6 @@
             <div class="wave2 two"></div>
             <div class="wave2 three"></div>
         </div>
-
     </div>
 </body>
 
